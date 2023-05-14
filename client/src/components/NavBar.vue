@@ -1,28 +1,21 @@
-<template> 
+<template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <router-link :to="{ path: '/' }" class="nav-link">Attendance App</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <NavItem text="Home" :to="{ path: '/' }" />
+                        <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
                     </li>
                     <li class="nav-item">
-                        <NavItem text="Home" :to="{ path: '/' }" />
-                    </li>
-                    <li class="nav-item">
-                        <NavItem text="Home" :to="{ path: '/' }" />
+                        <router-link :to="{ name: 'login' }" class="nav-link">Login</router-link>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </template>
-
-<script setup>
-import NavItem from './NavItem.vue';
-</script>

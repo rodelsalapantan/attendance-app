@@ -1,33 +1,51 @@
 <template lang="">
     <div class="container mt-5">
-      <form @submit.prevent="authStore.handleLogin" class="mx-auto border rounded-2 p-5 shadow">
-        <h1 class="text-center mb-3">LOGIN</h1>
+      <form @submit.prevent="authStore.handleLogin(form)" class="mx-auto border rounded-2 py-4 px-5 shadow">
+        <h1 class="text-center mb-3 fw-bold">LOGIN</h1>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input 
-            v-model="form.email"
-            type="text" id="email" class="form-control" placeholder="" aria-describedby="helpId">
-          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        <div class="form-floating mb-3">
+              <input
+                v-model="form.email"
+                type="email" 
+                class="form-control" 
+                :class="{'is-invalid' : authStore.error?.email}"
+                id="floatingEmailInput"
+                placeholder="name@example.com">
+              <label for="floatingEmailInput">Email address</label>
+
+              <small v-if="authStore.error.email" id="helpId" class="text-danger">{{ authStore.error.email[0] }}</small>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Name</label>
+        <div class="form-floating mb-3">
           <input
-            v-model="form.password"
-            type="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
-          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                v-model="form.password"
+                type="password" 
+                class="form-control" 
+                :class="{'is-invalid' : authStore.error?.password}"
+                id="floatingPasswordInput"
+                placeholder="Enter Password">
+              <label for="floatingPasswordInput">Password</label>
+          <small v-if="authStore.error.password" id="helpId" class="text-danger">{{ authStore.error.password[0] }}</small>
         </div>
+
+        <div class="text-center mb-3">
+          <router-link :to="{ path: '/'}" class="text-decoration-none small">Forgot Password?</router-link>
+        </div>
+        <div class="text-center mb-3">
+          <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
+        </div>
+        <hr />
         <div class="text-center">
-          <button type="submit" class="btn btn-primary px-5 ">Login</button>
+          <router-link :to="{ path: '/'}" class="btn btn-success" style="background-color: green">Create Account</router-link>
         </div>
       </form>
     </div>
 </template>
 <script setup>
-import useAuthStore from '@/store/user.js'
+import { useAuthStore } from '@/store/user.js'
 import { ref } from 'vue'
 
-//const authStore = useAuthStore()
+
+const authStore = useAuthStore()
 const form = ref({
   email: '',
   password: ''
