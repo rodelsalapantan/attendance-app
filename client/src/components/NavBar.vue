@@ -1,13 +1,28 @@
-<template lang="">
-    <nav class="nav justify-content-center ">
-        <a class="nav-link active" href="#">Active link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link disabled" href="#">Disabled link</a>
+<template> 
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <NavItem text="Home" :to="{ path: '/' }" />
+                    </li>
+                    <li class="nav-item">
+                        <NavItem text="Home" :to="{ path: '/' }" />
+                    </li>
+                    <li class="nav-item">
+                        <NavItem text="Home" :to="{ path: '/' }" />
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </template>
-<script setup>
 
+<script setup>
+import NavItem from './NavItem.vue';
 </script>
-<style lang="">
-    
-</style>
