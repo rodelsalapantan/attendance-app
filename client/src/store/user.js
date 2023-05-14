@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { axiosFetch } from '@/composables/AxiosFetch'
+import { axiosFetch } from '@/composables/AxiosFetch.js'
 
 export const useAuthStore = defineStore('authStore', {
     state: () => ({
@@ -19,8 +19,8 @@ export const useAuthStore = defineStore('authStore', {
             console.log(error)
         }, 
         async handleLogin(){
-            this.getToken()
-        }
+            //this.getToken()
+        },
         
-    }
+    },
 })
