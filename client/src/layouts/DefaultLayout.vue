@@ -33,7 +33,7 @@ const router = useRouter();
 const showLogoutDialog = async () => {
     await AlertDialog.fire({
         title: 'Are you sure?',
-        text: "Click confirm to continue.",
+        text: "Click confirm to continue logout.",
         icon: 'warning'
     }).then( async (result) => {
         if (result.isDismissed) {
