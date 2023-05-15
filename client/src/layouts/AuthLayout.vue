@@ -1,5 +1,5 @@
-<template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+<template lang="">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
         <div class="container-fluid">
             <router-link :to="{ path: '/' }" class="nav-link">Attendance App</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -18,4 +18,14 @@
             </div>
         </div>
     </nav>
+    <main >
+        <slot />
+    </main>
 </template>
+
+<style scoped>
+    nav.navbar{
+        /* background-color: #ededed; */
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+</style>

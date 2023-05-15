@@ -1,15 +1,11 @@
 <template>
   <LoadingScreen v-if="loading" />
   <template v-else>
-    <NavBar />
-    <main>
-      <router-view></router-view>
-    </main>
+    <router-view></router-view>
   </template>
 </template>
 
 <script setup>
-import NavBar from '@/components/NavBar.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import { ref, onMounted } from 'vue'
 

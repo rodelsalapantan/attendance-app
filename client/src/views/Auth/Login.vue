@@ -1,10 +1,11 @@
-<template lang="">
+<template>
+  <AuthLayout>
     <div class="container mt-5">
-      <form @submit.prevent="authStore.handleLogin(form)" class="mx-auto border rounded-2 py-4 px-5 shadow">
-        <h1 class="text-center mb-3 fw-bold">LOGIN</h1>
+      <form @submit.prevent="handleLogin" class="mx-auto border rounded-2 py-4 px-5 shadow">
+        <h1 class="text-center mb-3 fw-bold mb-5">Login Account</h1>
 
         <div class="form-floating mb-3">
-              <input
+              <input  
                 v-model="form.email"
                 type="email" 
                 class="form-control" 
@@ -13,7 +14,7 @@
                 placeholder="name@example.com">
               <label for="floatingEmailInput">Email address</label>
 
-              <small v-if="authStore.error.email" id="helpId" class="text-danger">{{ authStore.error.email[0] }}</small>
+              <small v-if="authStore.error?.email" id="helpId" class="text-danger">{{ authStore.error.email[0] }}</small>
         </div>
         <div class="form-floating mb-3">
           <input
@@ -24,7 +25,7 @@
                 id="floatingPasswordInput"
                 placeholder="Enter Password">
               <label for="floatingPasswordInput">Password</label>
-          <small v-if="authStore.error.password" id="helpId" class="text-danger">{{ authStore.error.password[0] }}</small>
+          <small v-if="authStore.error?.password" id="helpId" class="text-danger">{{ authStore.error.password[0] }}</small>
         </div>
 
         <div class="text-center mb-3">
@@ -35,22 +36,41 @@
         </div>
         <hr />
         <div class="text-center">
-          <router-link :to="{ path: '/'}" class="btn btn-success" style="background-color: green">Create Account</router-link>
+          <router-link :to="{ path: '/'}" class="btn btn-success">Create Account</router-link>
         </div>
       </form>
     </div>
+  </AuthLayout>
 </template>
 <script setup>
+import AuthLayout from '@/layouts/AuthLayout.vue';
 import { useAuthStore } from '@/store/user.js'
-import { ref } from 'vue'
-
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
-const form = ref({
-  email: '',
-  password: ''
-});
+const form = ref({ email: '', password: '' });
+const router = useRouter()
 
+
+const handleLogin = async () => {
+  try {
+    authStore.error = null;
+    await authStore.getTokens();
+    await authStore.login(form.value);
+    await authStore.getUser()
+    router.push({name: 'home'})
+
+  } catch (error) {
+    console.log(error)
+    authStore.error = error.response.data.errors
+  } 
+}
+onMounted(() => {
+  if (authStore.error) {
+    authStore.error = null
+  }
+})
 
 </script>
 
