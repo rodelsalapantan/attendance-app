@@ -8,28 +8,17 @@ const router = createRouter({
     routes,
 })
 
-const privateRoutes = [
-    '/home'
-];
-
-const publicRoutes = [
-    '/',
-    '/login',
-    '/register',
-];
-
-
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore()
     console.log(to.fullPath)
 
     // Accessing Private Routes but not logged in
-    if (privateRoutes.includes(to.fullPath) && !authStore.isLogin) {
+    if (to.meta.requireAuth && !authStore.isLogin) {
         next('/login')
         return
     }
     // Accessing Public Routes but logged in
-    if (publicRoutes.includes(to.fullPath) && authStore.isLogin) {
+    if (!to.meta.requireAuth && authStore.isLogin) {
         next('/home')
         return
     }

@@ -1,7 +1,7 @@
 <template lang="">
     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
         <div class="container-fluid">
-            <router-link :to="{ path: '/' }" class="nav-link">Attendance App</router-link>
+            <img src="@/assets/img/attendance-svgrepo-com.svg" alt="logo" width="30" height="30"><router-link :to="{ path: '/' }" class="nav-link mx-2">Attendance App</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
